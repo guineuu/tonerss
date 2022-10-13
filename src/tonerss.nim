@@ -7,7 +7,8 @@ import strutils
 
 # Crear tabla
 let taula = newUnicodeTable()
-taula.setHeaders(@[newCell("CS"), newCell("Ubicación", rightpad=5), newCell("Tinta restante", rightpad=5), newCell("Estado")])
+taula.setHeaders(@[newCell("CS"), newCell("Ubicación"), newCell("Tóner"), newCell("Kit"), newCell("Imagen"), newCell("Estado")])
+
 type Impresora = object
   lloc: string
   id: string
@@ -34,23 +35,29 @@ var checkCount = 0
 var msg = "Inicializando..."
 for impressora in llistaImpresores:
   let html = impresoras.getImpresora(impressora.id)
-  var tinta = getTinta(html)
-  msg = fgWhite("CS " & impressora.id)
+  var estado = getEstado(html)
+
+  var
+    tinta = estado[0]    
+    kit = estado[1]
+    imagen = estado[2]
+  
+  msg = fgWhite("CS" & impressora.id)
   progressBar.update(1, msg)
 
   var check = "✔"
 
-  if tinta < 10:
+  if tinta < 10 or kit < 10:
     check = "!"
     checkCount += 1
 
-  taula.addRow(@[impressora.id, impressora.lloc, $tinta & "%", check])
+  taula.addRow(@[impressora.id, impressora.lloc, $tinta & "%", $kit & "%", $imagen & "%", check])
 
 progressBar.update(1, "Completado".fgGreen())
 # Printar la tinta
 echo(fgBlue("\n\ntonerss - por Roger Gras"))
 echo(fgCyan("\nIneo Develop 4700P").bold())
 printTable(taula)
-echo fgRed($checkCount & " impresoras con menos del 10% de tinta.")
+echo fgRed($checkCount & " impresoras con alguno de los valores por debajo de 10%")
 
 llista.close()

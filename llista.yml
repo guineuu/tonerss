@@ -2,7 +2,7 @@
 - { lloc: "Planta Piloto", id: "8"}
 - { lloc: "Taller", id: "9"}
 - { lloc: "Materias Primas", id: "10"}
-- { lloc: "Expeciciones", id: "16"}
+- { lloc: "Expediciones", id: "16"}
 - { lloc: "Expediciones", id: "26"}
 - { lloc: "Recursos Humanos", id: "30"}
 - { lloc: "Operaciones", id: "31"}

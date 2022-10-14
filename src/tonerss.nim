@@ -45,10 +45,10 @@ for impressora in llistaImpresores:
   msg = fgWhite("CS" & impressora.id)
   progressBar.update(1, msg)
 
-  var check = "✔"
+  var check = "ok"
 
   if tinta < 10 or kit < 10:
-    check = "!"
+    check = "!!"
     checkCount += 1
 
   taula.addRow(@[impressora.id, impressora.lloc, $tinta & "%", $kit & "%", $imagen & "%", check])
